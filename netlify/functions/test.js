@@ -1,6 +1,7 @@
 const { schedule } = require("@netlify/functions");
 
 const handler = async function () {
+  console.log(process.env.REACT_APP_MOMO_URL);
   const sendMessageDiscord = () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -34,7 +35,7 @@ const handler = async function () {
       redirect: "follow",
     };
 
-    fetch(process.env.MOMO_URL + "transaction.php", requestOptions)
+    fetch(process.env.REACT_MOMO_URL + "transaction.php", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => {
