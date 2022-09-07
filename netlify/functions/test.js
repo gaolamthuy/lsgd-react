@@ -1,12 +1,12 @@
 const { schedule } = require("@netlify/functions");
 
 const handler = async function () {
-  var axios = require("axios");
-  var FormData = require("form-data");
-  var data = new FormData();
+  const axios = require("axios");
+  const FormData = require("form-data");
+  let data = new FormData();
   data.append("content", "test");
 
-  var config = {
+  let config = {
     method: "post",
     url: "https://discord.com/api/webhooks/1010911250743570502/Ixj4EiWE8-DkNAqulQxNHsIRiB7X5CInCVDnEH_Uzmkh2Hu_CjeeBSrBFDtAmCcQSXnK",
     headers: {
@@ -19,10 +19,10 @@ const handler = async function () {
   };
 
   axios(config)
-    .then(function (response) {
+    .then((response) => {
       console.log(JSON.stringify(response.data));
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
     });
 
