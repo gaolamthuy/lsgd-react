@@ -39,7 +39,7 @@ const handler = async function () {
       .then((result) => console.log(result))
       .catch((error) => {
         console.log("error", error);
-        sendMessageDiscord();
+        // sendMessageDiscord();
       });
   };
   pingMomo();
