@@ -1,7 +1,8 @@
 const { schedule } = require("@netlify/functions");
 
 const handler = async function () {
-  console.log(process.env.REACT_APP_MOMO_URL);
+  console.log("test");
+  //   console.log(process.env.REACT_APP_MOMO_URL);
   //   const sendMessageDiscord = () => {
   //     var myHeaders = new Headers();
   //     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
