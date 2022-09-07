@@ -1,17 +1,28 @@
 const { schedule } = require("@netlify/functions");
 
-const handler = async function () {
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
+const fetch = require("node-fetch");
 
-  fetch("api.randomuser.me", requestOptions)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
+const API_ENDPOINT = "https://api.randomuser.me";
+
+const handler = async (event, context) => {
+  let response;
+  try {
+    response = await fetch(API_ENDPOINT);
+    // handle response
+  } catch (err) {
+    return {
+      statusCode: err.statusCode || 500,
+      body: JSON.stringify({
+        error: err.message,
+      }),
+    };
+  }
+
   return {
     statusCode: 200,
+    body: JSON.stringify({
+      data: response,
+    }),
   };
 };
 
