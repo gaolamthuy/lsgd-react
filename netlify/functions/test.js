@@ -1,7 +1,6 @@
 const { schedule } = require('@netlify/functions')
 
 const handler = async function() {
-    console.log(process.env)
     console.log("Received event:")
 
     return {
@@ -11,4 +10,5 @@ const handler = async function() {
     };
 };
 
-module.exports.handler = schedule("*/2 3-5,8-10 * * *", handler);
+//(Times shown in UTC)
+module.exports.handler = schedule("*/2 0-11,23 * * *", handler);
