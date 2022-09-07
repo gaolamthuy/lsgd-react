@@ -20,7 +20,7 @@ const handler = async function () {
     };
 
     fetch(
-      "https://discord.com/api/webhooks/1008656290463109201/6YCO-J9pIF0EZv_4cylRueuPdvXU4KR2R9u3Rt8QmRUZrRtKKKj32qW0Fi1WAuA6DFRH",
+      "https://discord.com/api/webhooks/1010911250743570502/Ixj4EiWE8-DkNAqulQxNHsIRiB7X5CInCVDnEH_Uzmkh2Hu_CjeeBSrBFDtAmCcQSXnK",
       requestOptions
     )
       .then((response) => response.text())
