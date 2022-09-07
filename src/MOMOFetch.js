@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 
-console.log(process.env)
+// console.log(process.env)
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
