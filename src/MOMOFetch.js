@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 
-const momoUrl = "https://momo.hophamlam.com/transaction.php";
+console.log(process.env)
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      const response = await fetch(momoUrl);
+      const response = await fetch(process.env.REACT_APP_MOMO_URL+'/transaction.php');
       const { message } = await response.json();
       setServer02Data(message.data.notifications);
       setLoading(false);

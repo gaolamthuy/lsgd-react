@@ -5,11 +5,6 @@ import { Link } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 
-// const vcbUrl = process.dotenv.REACT_APP_VCB_URL;
-// console.log(vcbUrl)
-
-const vcbUrl = "https://vcb.hophamlam.com/Vietcombank-new/index.php/api"
-
 //get today
 var today = () => moment().format("DD/MM/YYYY")
 var begin = () => (moment().subtract(14, 'days')).format("DD/MM/YYYY")
@@ -21,7 +16,7 @@ export default function Transactions() {
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      const response = await fetch(vcbUrl, {
+      const response = await fetch(process.env.REACT_APP_VCB_URL, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -30,9 +25,9 @@ export default function Transactions() {
         body: JSON.stringify({
           begin: begin(),
           end: today(),
-          username: "0938568040",
-          password: "UFTNG9uzq$zu%4bUNMau",
-          accountNumber: "1012842851",
+          username: process.env.REACT_APP_VCB_USERNAME,
+          password: process.env.REACT_APP_VCB_PASSWORD,
+          accountNumber: process.env.REACT_APP_VCB_ACCOUNTNUMBER,
         }),
       });
       const { results } = await response.json();
