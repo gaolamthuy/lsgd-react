@@ -1,24 +1,15 @@
 const { schedule } = require("@netlify/functions");
 
 const handler = async function () {
-  const axios = require("axios");
-
-  let config = {
-    method: "get",
-    url: "api.randomuser.me",
-    headers: {},
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
   };
 
-  axios(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
-  console.log("Received event:");
-
+  fetch("api.randomuser.me", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
   return {
     statusCode: 200,
   };
