@@ -1,6 +1,7 @@
 const { schedule } = require('@netlify/functions')
 
 const handler = async function() {
+    console.log(process.env)
     console.log("Received event:")
 
     return {
