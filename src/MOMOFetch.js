@@ -92,13 +92,6 @@ export default function Home() {
                 }
               };
 
-              function play() {
-                var audio = new Audio(
-                  "./public/583950__fenodyrie__bell-ringing-loudly.wav"
-                );
-                audio.play();
-              }
-
               // console.log(checkNewTransaction(moment(data.time)))
 
               return (
@@ -107,7 +100,6 @@ export default function Home() {
                     border="danger"
                     style={{ width: "20rem", margin: "5px 5px 5px 5px" }}
                   >
-                    {checkNewTransaction(moment(data.time))} {play()}
                     <Card.Body>
                       <Badge bg="danger">
                         <Card.Title>{data.caption}</Card.Title>
