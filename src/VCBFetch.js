@@ -1,6 +1,6 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row, Stack, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
@@ -175,12 +175,6 @@ export default function Transactions() {
             }
           })}
       </Row>
-      {/* new body */}
-      <Row>
-        test
-        <p>today</p>
-      </Row>
-      <p>{get14days(4)} </p>
     </Container>
   );
 }
