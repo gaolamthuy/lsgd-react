@@ -29,36 +29,38 @@ export default function Transactions() {
   const [loading, setLoading] = useState(false);
   const [server01Data, setServer01Data] = useState();
   const [groupData, setGroupData] = useState([]);
+  const [refreshData, setRefreshData] = useState(false);
+
+  const fetchData = async () => {
+    const response = await fetch(process.env.REACT_APP_VCB_URL, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        begin: begin(),
+        end: today(),
+        username: process.env.REACT_APP_VCB_USERNAME,
+        password: process.env.REACT_APP_VCB_PASSWORD,
+        accountNumber: process.env.REACT_APP_VCB_ACCOUNTNUMBER,
+      }),
+    });
+    const { results } = await response.json();
+    const sortedData = results.sort(function (a, b) {
+      return (
+        new Date(parseDate(b.TransactionDate)) -
+        new Date(parseDate(a.TransactionDate))
+      );
+    });
+    setServer01Data(sortedData);
+    setLoading(false);
+  };
 
   useEffect(() => {
     setLoading(true);
-    const fetchData = async () => {
-      const response = await fetch(process.env.REACT_APP_VCB_URL, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          begin: begin(),
-          end: today(),
-          username: process.env.REACT_APP_VCB_USERNAME,
-          password: process.env.REACT_APP_VCB_PASSWORD,
-          accountNumber: process.env.REACT_APP_VCB_ACCOUNTNUMBER,
-        }),
-      });
-      const { results } = await response.json();
-      const sortedData = results.sort(function (a, b) {
-        return (
-          new Date(parseDate(b.TransactionDate)) -
-          new Date(parseDate(a.TransactionDate))
-        );
-      });
-      setServer01Data(sortedData);
-      setLoading(false);
-    };
     fetchData();
-  }, []);
+  }, [refreshData]);
 
   useEffect(() => {
     if (server01Data) {
@@ -74,6 +76,12 @@ export default function Transactions() {
     }
   }, [server01Data]);
 
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setTimeout();
+  //   });
+  // });
+
   // const todayData = groupData[moment().subtract(0, "days").format("DD/MM/YYYY")];
 
   const transactionData = Object.keys(groupData).map((date) => {
@@ -84,10 +92,15 @@ export default function Transactions() {
     <Container className="mt-5">
       <Nav variant="pills" defaultActiveKey="/home">
         <Nav.Item>
-          <Nav.Link eventKey="disabled" disabled>
-            <Link to="/VCBFetch" className="mb-2 btn btn-success disabled">
+          <Nav.Link>
+            <Button
+              className="button"
+              variant="success"
+              type="button"
+              onClick={() => setRefreshData(!refreshData)}
+            >
               Xem chuyển khoản Vietcombank
-            </Link>
+            </Button>
           </Nav.Link>
         </Nav.Item>
 

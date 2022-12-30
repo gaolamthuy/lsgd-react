@@ -11,16 +11,17 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [server02Data, setServer02Data] = useState([]);
 
+  const fetchData = async () => {
+    const response = await fetch(
+      process.env.REACT_APP_MOMO_URL + "/transaction.php"
+    );
+    const { message } = await response.json();
+    setServer02Data(message.data.notifications);
+    setLoading(false);
+  };
+
   useEffect(() => {
     setLoading(true);
-    const fetchData = async () => {
-      const response = await fetch(
-        process.env.REACT_APP_MOMO_URL + "/transaction.php"
-      );
-      const { message } = await response.json();
-      setServer02Data(message.data.notifications);
-      setLoading(false);
-    };
     fetchData();
   }, []);
 
