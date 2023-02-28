@@ -36,7 +36,13 @@ After updating the `package.json` file, you may need to rebuild the Docker image
 docker-compose build
 ```
 
-sudo docker-compose -f ./lsgd-react/docker-compose.prod.yml build
+```
+sudo docker-compose -f ~/lsgd-react/docker-compose.prod.yml build
+```
+
+```
+sudo docker-compose -f ~/lsgd-react/docker-compose.prod.yml up -d
+```
 
 # Getting Started with Create React App
 
