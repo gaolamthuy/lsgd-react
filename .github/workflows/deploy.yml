@@ -18,5 +18,5 @@ jobs:
             sudo git restore .
             sudo git pull
             sudo docker-compose -f ~/lsgd-react/docker-compose.prod.yml build
-            sudo docker-compose -f ~/lsgd-react/docker-compose.prod.yml up -d
+            sudo docker-compose -f ~/lsgd-react/docker-compose.prod.yml restart
             echo "done"
