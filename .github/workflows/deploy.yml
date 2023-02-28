@@ -1,22 +1,22 @@
-name: remote ssh command
-on: [push]
-jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          # password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: |
-            cd ~/lsgd-react/
-            sudo git restore .
-            sudo git pull
-            sudo docker-compose build
-            sudo docker-compose up -d
-            echo "hi!"
+# name: remote ssh command
+# on: [push]
+# jobs:
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: executing remote ssh commands using ssh key
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.HOST }}
+#           username: ${{ secrets.USERNAME }}
+#           key: ${{ secrets.KEY }}
+#           # password: ${{ secrets.PASSWORD }}
+#           port: ${{ secrets.PORT }}
+#           script: |
+#             cd ~/lsgd-react/
+#             sudo git restore .
+#             sudo git pull
+#             sudo docker-compose build
+#             sudo docker-compose up -d
+#             echo "hi!"
