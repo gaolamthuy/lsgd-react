@@ -36,6 +36,10 @@ After updating the `package.json` file, you may need to rebuild the Docker image
 docker-compose build
 ```
 
+## Deploy to production
+
+*You should handle .env manually*
+
 ```
 sudo docker-compose -f ~/lsgd-react/docker-compose.prod.yml build
 ```
