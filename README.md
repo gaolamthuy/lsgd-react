@@ -1,3 +1,41 @@
+# Local development with docker
+
+## Install new dependency
+
+Start the container in interactive mode with a shell:
+
+```bash
+docker-compose run --rm app sh
+```
+
+Run the `npm install` command to install the new dependency:
+
+```bash
+npm install axios
+```
+
+Exit the container:
+
+```bash
+exit
+```
+
+This will install the `axios` package in the `node_modules` directory within the container. However, as I mentioned earlier, it will not automatically update the `package.json` file.
+
+To update the `package.json` file with the new dependency, you can run the `npm install` command again with the `--save` flag:
+
+```bash
+docker-compose run --rm app npm install --save axios
+```
+
+This will install the `axios` package and add it to the `dependencies` section of the `package.json` file.
+
+After updating the `package.json` file, you may need to rebuild the Docker image to incorporate the changes. You can do this by running the following command:
+
+```bash
+docker-compose build
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
