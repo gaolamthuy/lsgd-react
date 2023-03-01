@@ -99,7 +99,7 @@ export default function Transactions() {
               type="button"
               onClick={() => setRefreshData(!refreshData)}
             >
-              Xem chuyển khoản Vietcombank test ci-cd
+              Xem chuyển khoản Vietcombank
             </Button>
           </Nav.Link>
         </Nav.Item>
