@@ -13,16 +13,19 @@ export default function Home() {
 
   const fetchData = async () => {
     const response = await fetch(
-      process.env.REACT_APP_MOMO_URL + "/transaction.php"
+      process.env.REACT_APP_MOMO_URL
     );
-    const { message } = await response.json();
-    setServer02Data(message.data.notifications);
+    const { momoMsg } = await response.json();
+    // console.log(momoMsg)
+
+    setServer02Data(momoMsg);
     setLoading(false);
   };
 
   useEffect(() => {
     setLoading(true);
     fetchData();
+    
   }, []);
 
   return (
@@ -50,9 +53,10 @@ export default function Home() {
         )}
         {!loading &&
           server02Data.map((data, k) => {
-            if (data.tranId !== 0) {
+            if (data.id !== 0) {
               // var moment = moment(data.time)
-              var momentFromNow = moment(data.time).fromNow();
+              var momentFromNow = moment(data.lastUpdate).fromNow();
+              
 
               //translate minutes ago...
               const momentFromNowTranslate = (moment) => {
@@ -92,6 +96,12 @@ export default function Home() {
                   );
                 }
               };
+              // console.log(JSON.parse(data.transhisData).baseInfo)
+
+              // get transaction description
+              const transhisData = JSON.parse(data.transhisData);
+              const shortTitle = transhisData.baseInfo.title.vi;
+
 
               // console.log(checkNewTransaction(moment(data.time)))
 
@@ -103,7 +113,7 @@ export default function Home() {
                   >
                     <Card.Body>
                       <Badge bg="danger">
-                        <Card.Title>{data.caption}</Card.Title>
+                        <Card.Title>Nhận {parseFloat(data.totalAmount).toLocaleString('en')}đ</Card.Title>
                       </Badge>
                       <h4>
                         <Card.Text>
@@ -113,9 +123,9 @@ export default function Home() {
                         </Card.Text>
                       </h4>
                       <Card.Text>
-                        {moment(data.time).format("DD/MM/YYYY HH:mm:ss")}
+                        {moment(data.lastUpdate).format("DD/MM/YYYY HH:mm:ss")}
                       </Card.Text>
-                      <Card.Text>{data.body}</Card.Text>
+                      <Card.Text>{shortTitle}</Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>

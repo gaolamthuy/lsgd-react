@@ -1,9 +1,9 @@
 # Local development with docker
 
 ## Start development environment
-Add `-d` to get run detached mode in terminal
+Add `-d` to get run detached mode in terminal, dev server ready at port 3000
 ```bash
-sudo docker-compose -f ~/lsgd-react/docker-compose.dev.yml up
+sudo docker-compose -f ~/lsgd-react/docker-compose.dev.yml up -d
 ```
 
 ## Install new dependency
