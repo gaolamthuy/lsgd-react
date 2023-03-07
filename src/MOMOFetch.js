@@ -125,7 +125,7 @@ export default function Home() {
                       <Card.Text>
                         {moment(data.lastUpdate).format("DD/MM/YYYY HH:mm:ss")}
                       </Card.Text>
-                      <Card.Text>{shortTitle}</Card.Text>
+                      <Card.Text>{shortTitle} {data.comment}</Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>

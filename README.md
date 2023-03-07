@@ -47,11 +47,7 @@ docker-compose build
 *You should handle .env manually*
 
 ```
-sudo docker-compose -f ~/lsgd-react/docker-compose.prod.yml build
-```
-
-```
-sudo docker-compose -f ~/lsgd-react/docker-compose.prod.yml up -d
+sudo docker-compose -f ~/lsgd-react/docker-compose.prod.yml up -d --build --force-recreate -d
 ```
 
 # Getting Started with Create React App
