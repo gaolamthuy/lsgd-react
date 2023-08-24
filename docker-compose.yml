@@ -13,7 +13,7 @@ services:
     networks:
       - caddy
     labels:
-      caddy: lsgd.gaolamthuy.vn
+      caddy: ${DOMAIN}
       caddy.reverse_proxy: "{{upstreams 3001}}"
     expose:
       - "3001"
