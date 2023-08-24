@@ -10,8 +10,14 @@ services:
         NODE_ENV: production
     environment:
       - NODE_ENV=production
+    networks:
+      - caddy
     labels:
       caddy: lsgd.gaolamthuy.vn
       caddy.reverse_proxy: "{{upstreams 3001}}"
     ports:
       - "3000:3001"
+
+networks:
+  caddy:
+    external: true
