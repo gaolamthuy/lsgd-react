@@ -15,8 +15,8 @@ services:
     labels:
       caddy: lsgd.gaolamthuy.vn
       caddy.reverse_proxy: "{{upstreams 3001}}"
-    ports:
-      - "3000:3001"
+    expose:
+      - "3001"
 
 networks:
   caddy:
