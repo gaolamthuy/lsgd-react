@@ -2,7 +2,9 @@
 
 *You should handle .env manually*
 
-
+```
+scp nhanhoa-1.hophamlam.com:~/lsgd-react/.env ~/lsgd-react
+```
 
 ```
 sudo docker-compose -f ~/lsgd-react/docker-compose.prod.yml up -d --build --force-recreate -d
