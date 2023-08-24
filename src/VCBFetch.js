@@ -39,6 +39,7 @@ export default function Transactions() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        action: "transactions",
         begin: begin(),
         end: today(),
         username: process.env.REACT_APP_VCB_USERNAME,
@@ -46,7 +47,8 @@ export default function Transactions() {
         accountNumber: process.env.REACT_APP_VCB_ACCOUNTNUMBER,
       }),
     });
-    const { results } = await response.json();
+    const results = (await response.json()).transactions;
+    console.log(results);
     const sortedData = results.sort(function (a, b) {
       return (
         new Date(parseDate(b.TransactionDate)) -
