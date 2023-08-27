@@ -29,78 +29,62 @@ const TransactionCard = ({ post }) => {
           console.log(typeof momentFromNow);
 
           const typeOfMomentFromNow = (moment) => {
-            if (moment.includes("a few seconds ago") === true) {
-              return "primary";
-            } else if (moment.includes("seconds ago") === true) {
-              return "primary";
-            } else if (moment.includes("1 minute ago") === true) {
-              return "primary";
-            } else if (moment.includes("minutes ago") === true) {
-              return "primary";
-            } else if (moment.includes("an hour ago") === true) {
-              return "primary";
-            } else if (moment.includes("hours ago") === true) {
-              return "primary";
-            } else if (moment.includes("a day ago") === true) {
-              return "secondary";
-            } else if (moment.includes("days ago") === true) {
-              return "secondary";
-            } else if (moment.includes("a month ago") === true) {
-              return "secondary";
-            } else if (moment.includes("months ago") === true) {
-              return "secondary";
-            }
+            const primaryKeywords = [
+              "a few seconds ago",
+              "seconds ago",
+              "1 minute ago",
+              "minutes ago",
+              "an hour ago",
+              "hours ago",
+            ];
+
+            return primaryKeywords.some((keyword) => moment.includes(keyword))
+              ? "primary"
+              : "secondary";
           };
 
-          //translate minutes ago...
           const momentFromNowTranslate = (moment) => {
-            if (moment.includes("a few seconds ago") === true) {
-              return "vài giây trước";
-            } else if (moment.includes("seconds ago") === true) {
-              return moment.replace("seconds ago", "giây trước");
-            } else if (moment.includes("1 minute ago") === true) {
-              return "1 phút trước";
-            } else if (moment.includes("minutes ago") === true) {
-              return moment.replace("minutes ago", "phút trước");
-            } else if (moment.includes("an hour ago") === true) {
-              return "1 giờ trước";
-            } else if (moment.includes("hours ago") === true) {
-              return moment.replace("hours ago", "giờ trước");
-            } else if (moment.includes("a day ago") === true) {
-              return "1 ngày trước";
-            } else if (moment.includes("days ago") === true) {
-              return moment.replace("days ago", "ngày trước");
-            } else if (moment.includes("a month ago") === true) {
-              return moment.replace("a month ago", "1 tháng trước");
-            } else if (moment.includes("months ago") === true) {
-              return moment.replace("months ago", "tháng trước");
+            const translations = {
+              "a few seconds ago": "vài giây trước",
+              "seconds ago": "giây trước",
+              "1 minute ago": "1 phút trước",
+              "minutes ago": "phút trước",
+              "an hour ago": "1 giờ trước",
+              "hours ago": "giờ trước",
+              "a day ago": "1 ngày trước",
+              "days ago": "ngày trước",
+              "a month ago": "1 tháng trước",
+              "months ago": "tháng trước",
+            };
+
+            for (const keyword in translations) {
+              if (moment.includes(keyword)) {
+                return moment.replace(keyword, translations[keyword]);
+              }
             }
           };
 
-          //translate date
           const translateValidFullDate = (weekday) => {
-            if (weekday.includes("Mon")) {
-              return weekday.replace("Mon", "Thứ Hai");
-            } else if (weekday.includes("Tue")) {
-              return weekday.replace("Tue", "Thứ Ba");
-            } else if (weekday.includes("Wed")) {
-              return weekday.replace("Wed", "Thứ Tư");
-            } else if (weekday.includes("Thu")) {
-              return weekday.replace("Thu", "Thứ Năm");
-            } else if (weekday.includes("Fri")) {
-              return weekday.replace("Fri", "Thứ Sáu");
-            } else if (weekday.includes("Sat")) {
-              return weekday.replace("Sat", "Thứ Bảy");
-            } else if (weekday.includes("Sun")) {
-              return weekday.replace("Sun", "Chủ Nhật");
+            const weekdayMap = {
+              Mon: "Thứ Hai",
+              Tue: "Thứ Ba",
+              Wed: "Thứ Tư",
+              Thu: "Thứ Năm",
+              Fri: "Thứ Sáu",
+              Sat: "Thứ Bảy",
+              Sun: "Chủ Nhật",
+            };
+
+            for (const key in weekdayMap) {
+              if (weekday.includes(key)) {
+                return weekday.replace(key, weekdayMap[key]);
+              }
             }
           };
 
           //print if it's a new transaction
           const checkNewTransaction = (transdate) => {
-            if (
-              moment().isBefore(moment(transdate).add(+20, "minutes")) === true
-            ) {
+            if (moment().isBefore(moment(transdate).add(20, "minutes"))) {
               return (
                 <Card.Header style={{ fontSize: "2rem" }}>
                   <Badge bg="warning">Mới</Badge>
