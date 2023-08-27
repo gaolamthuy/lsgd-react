@@ -31,5 +31,3 @@ jobs:
             sudo docker image prune -a --force
             sudo docker compose -f docker-compose.prod.yml up --build --force-recreate --no-deps -d
             echo "done"
-
-            scp nhanhoa-1.hophamlam.com:~/lsgd-react/.env ~/lsgd-react
