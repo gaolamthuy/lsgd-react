@@ -5,18 +5,13 @@ import { Link } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 
-// console.log(process.env)
-
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [server02Data, setServer02Data] = useState([]);
 
   const fetchData = async () => {
-    const response = await fetch(
-      process.env.REACT_APP_MOMO_URL
-    );
+    const response = await fetch(process.env.REACT_APP_MOMO_URL);
     const { momoMsg } = await response.json();
-    // console.log(momoMsg)
 
     setServer02Data(momoMsg);
     setLoading(false);
@@ -25,7 +20,6 @@ export default function Home() {
   useEffect(() => {
     setLoading(true);
     fetchData();
-    
   }, []);
 
   return (
@@ -56,7 +50,6 @@ export default function Home() {
             if (data.id !== 0) {
               // var moment = moment(data.time)
               var momentFromNow = moment(data.lastUpdate).fromNow();
-              
 
               //translate minutes ago...
               const momentFromNowTranslate = (moment) => {
@@ -102,7 +95,6 @@ export default function Home() {
               const transhisData = JSON.parse(data.transhisData);
               const shortTitle = transhisData.baseInfo.title.vi;
 
-
               // console.log(checkNewTransaction(moment(data.time)))
 
               return (
@@ -113,7 +105,10 @@ export default function Home() {
                   >
                     <Card.Body>
                       <Badge bg="danger">
-                        <Card.Title>Nhận {parseFloat(data.totalAmount).toLocaleString('en')}đ</Card.Title>
+                        <Card.Title>
+                          Nhận{" "}
+                          {parseFloat(data.totalAmount).toLocaleString("en")}đ
+                        </Card.Title>
                       </Badge>
                       <h4>
                         <Card.Text>
@@ -125,7 +120,9 @@ export default function Home() {
                       <Card.Text>
                         {moment(data.lastUpdate).format("DD/MM/YYYY HH:mm:ss")}
                       </Card.Text>
-                      <Card.Text>{shortTitle} {data.comment}</Card.Text>
+                      <Card.Text>
+                        {shortTitle} {data.comment}
+                      </Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>

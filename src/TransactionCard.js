@@ -2,100 +2,83 @@ import React from "react";
 import moment from "moment";
 import { Card, Col, Badge } from "react-bootstrap";
 
-console.log("test");
+export const TransactionCard = ({ post }) => {
+  const weekdayMap = {
+    Mon: "Thứ Hai",
+    Tue: "Thứ Ba",
+    Wed: "Thứ Tư",
+    Thu: "Thứ Năm",
+    Fri: "Thứ Sáu",
+    Sat: "Thứ Bảy",
+    Sun: "Chủ Nhật",
+  };
 
-const TransactionCard = ({ post }) => {
+  const translations = {
+    "a few seconds ago": "vài giây trước",
+    "seconds ago": "giây trước",
+    "1 minute ago": "1 phút trước",
+    "minutes ago": "phút trước",
+    "an hour ago": "1 giờ trước",
+    "hours ago": "giờ trước",
+    "a day ago": "1 ngày trước",
+    "days ago": "ngày trước",
+    "a month ago": "1 tháng trước",
+    "months ago": "tháng trước",
+  };
+
+  const translateValidFullDate = (weekday) => {
+    const key = Object.keys(weekdayMap).find((key) => weekday.includes(key));
+    return key ? weekday.replace(key, weekdayMap[key]) : weekday;
+  };
+
+  const momentFromNowTranslate = (momentTime) => {
+    const key = Object.keys(translations).find((key) =>
+      momentTime.includes(key)
+    );
+    return key ? momentTime.replace(key, translations[key]) : momentTime;
+  };
+
+  const typeOfMomentFromNow = (momentTime) => {
+    return [
+      "a few seconds ago",
+      "seconds ago",
+      "1 minute ago",
+      "minutes ago",
+      "an hour ago",
+      "hours ago",
+    ].some((keyword) => momentTime.includes(keyword))
+      ? "primary"
+      : "secondary";
+  };
+
+  const checkNewTransaction = (transdate) =>
+    moment().isBefore(moment(transdate).add(20, "minutes")) ? (
+      <Card.Header style={{ fontSize: "2rem" }}>
+        <Badge bg="warning">Mới</Badge>
+      </Card.Header>
+    ) : null;
+
+  const zeroPad = (num) => num.toString().padStart(6, "0");
+
   return (
     <>
       {post.map((data, k) => {
         if (data.CD === "+") {
-          //handle PCTime
-          function zeroPad(num) {
-            return num.toString().padStart(6, "0");
-          }
-          var validDate = moment(data.TransactionDate, "DD/MM/YYYY").format(
+          const validDate = moment(data.TransactionDate, "DD/MM/YYYY").format(
             "DD/MM/YYYY"
           );
-          var validTime = moment(zeroPad(data.PCTime), "HH:mm:ss").format(
+          const validTime = moment(zeroPad(data.PCTime), "HH:mm:ss").format(
             "HH:mm:ss"
           );
-          var validFullDateTime = moment(
-            validDate + " " + validTime,
+          const validFullDateTime = moment(
+            `${validDate} ${validTime}`,
             "DD/MM/YYYY HH:mm:ss"
           );
-
-          var validFullDateTimeString = validFullDateTime.format(
+          const validFullDateTimeString = validFullDateTime.format(
             "🗓️ddd, DD/MM/YYYY ⏰HH:mm:ss"
           );
-          var momentFromNow = validFullDateTime.fromNow();
-          console.log(typeof momentFromNow);
+          const momentFromNow = validFullDateTime.fromNow();
 
-          const typeOfMomentFromNow = (moment) => {
-            const primaryKeywords = [
-              "a few seconds ago",
-              "seconds ago",
-              "1 minute ago",
-              "minutes ago",
-              "an hour ago",
-              "hours ago",
-            ];
-
-            return primaryKeywords.some((keyword) => moment.includes(keyword))
-              ? "primary"
-              : "secondary";
-          };
-
-          const momentFromNowTranslate = (moment) => {
-            const translations = {
-              "a few seconds ago": "vài giây trước",
-              "seconds ago": "giây trước",
-              "1 minute ago": "1 phút trước",
-              "minutes ago": "phút trước",
-              "an hour ago": "1 giờ trước",
-              "hours ago": "giờ trước",
-              "a day ago": "1 ngày trước",
-              "days ago": "ngày trước",
-              "a month ago": "1 tháng trước",
-              "months ago": "tháng trước",
-            };
-
-            for (const keyword in translations) {
-              if (moment.includes(keyword)) {
-                return moment.replace(keyword, translations[keyword]);
-              }
-            }
-          };
-
-          const translateValidFullDate = (weekday) => {
-            const weekdayMap = {
-              Mon: "Thứ Hai",
-              Tue: "Thứ Ba",
-              Wed: "Thứ Tư",
-              Thu: "Thứ Năm",
-              Fri: "Thứ Sáu",
-              Sat: "Thứ Bảy",
-              Sun: "Chủ Nhật",
-            };
-
-            for (const key in weekdayMap) {
-              if (weekday.includes(key)) {
-                return weekday.replace(key, weekdayMap[key]);
-              }
-            }
-          };
-
-          //print if it's a new transaction
-          const checkNewTransaction = (transdate) => {
-            if (moment().isBefore(moment(transdate).add(20, "minutes"))) {
-              return (
-                <Card.Header style={{ fontSize: "2rem" }}>
-                  <Badge bg="warning">Mới</Badge>
-                </Card.Header>
-              );
-            }
-          };
-
-          //print cards
           return (
             <Col key={k} className="py-2" xs={12} md={6} lg={4}>
               <Card border="success">
@@ -116,16 +99,14 @@ const TransactionCard = ({ post }) => {
                   <Card.Text>
                     {translateValidFullDate(validFullDateTimeString)}
                   </Card.Text>
-
                   <Card.Text>{data.Description}</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           );
         }
+        return null;
       })}
     </>
   );
 };
-
-export default TransactionCard;

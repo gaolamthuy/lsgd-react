@@ -12,13 +12,11 @@ import {
 import { Link } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
-import TransactionCard from "./TransactionCard";
+import { TransactionCard } from "./TransactionCard";
 
 //get today
 var today = () => moment().format("DD/MM/YYYY");
 var begin = () => moment().subtract(14, "days").format("DD/MM/YYYY");
-
-var get14days = (day) => moment().subtract(day, "days").format("DD/MM/YYYY");
 
 function parseDate(str) {
   var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
