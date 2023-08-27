@@ -50,6 +50,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "prettier": "3.0.2",
     "react-error-overlay": "^6.0.9"
   }
 }
