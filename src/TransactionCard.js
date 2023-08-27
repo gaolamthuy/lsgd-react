@@ -2,6 +2,8 @@ import React from "react";
 import moment from "moment";
 import { Card, Col, Badge } from "react-bootstrap";
 
+console.log("test");
+
 const TransactionCard = ({ post }) => {
   return (
     <>
