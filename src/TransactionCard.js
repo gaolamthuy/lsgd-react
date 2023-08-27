@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { Card, Col, Badge } from "react-bootstrap";
 
-console.log("test");
+console.log("test 1");
 
 const TransactionCard = ({ post }) => {
   return (
