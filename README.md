@@ -1,6 +1,6 @@
 # Deploy to production
 
-*You should handle .env manually*
+_You should handle .env manually_
 
 ```
 sudo docker compose -f ~/lsgd-react/docker-compose.yml up -d --build --force-recreate -d
@@ -76,3 +76,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+.
